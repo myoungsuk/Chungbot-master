@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "951510187257",
+    "project_id": "chungbot-dxyu",
+    "storage_bucket": "chungbot-dxyu.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:951510187257:android:0152d109debdc1606b3628",
+        "android_client_info": {
+          "package_name": "com.chungbot"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "951510187257-gqv1aqqsu3mmk0nhsag9djfqint90fah.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.chungbot",
+            "certificate_hash": "dfec56b88315783df5c39e7b3b14f299e76891bd"
+          }
+        },
+        {
+          "client_id": "951510187257-9c175igcjgnspiq094d2kl6m1otp6j7d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANhaKNFtGRkNfo-VIdknSPUOe7-fCFQDw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "951510187257-9c175igcjgnspiq094d2kl6m1otp6j7d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

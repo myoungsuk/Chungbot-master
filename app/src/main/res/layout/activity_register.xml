@@ -103,7 +103,6 @@
                     android:drawableLeft="@drawable/ic_perm_identity_black_24dp"
                     android:drawablePadding="10dp"
                     android:hint="NAME"
-                    android:inputType="textPassword"
                     android:padding="20dp"
                     android:textColorHint="#606060"
                     android:textSize="14sp" />

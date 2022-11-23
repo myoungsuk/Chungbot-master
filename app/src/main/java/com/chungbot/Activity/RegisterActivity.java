@@ -1,26 +1,31 @@
 package com.chungbot.Activity;
 
-import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
-import android.Manifest;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.chungbot.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+
+import java.util.HashMap;
 
 
 public class RegisterActivity extends AppCompatActivity
@@ -32,6 +37,8 @@ public class RegisterActivity extends AppCompatActivity
     private Uri imageUri;
     private ProgressBar progressBar;
     private EditText emailEditText, passwordEditText, passwordCheckEditText, et_registration_name;
+    private FirebaseAuth auth;
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -40,7 +47,10 @@ public class RegisterActivity extends AppCompatActivity
         setContentView(R.layout.activity_register);
 
 
-        FirebaseAuth auth = FirebaseAuth.getInstance();
+        auth = FirebaseAuth.getInstance();
+        //firebase 정의
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         ImageButton btnSignIn = findViewById(R.id.signUpButton);
         Button btnGotoLogin = findViewById(R.id.gotoLoginButton);
@@ -67,17 +77,96 @@ public class RegisterActivity extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-                if(!emailEditText.getText().toString().equals("") && !passwordEditText.getText().toString().equals("")){
-                    //이메일과 비밀번호가 공백이 아닌 경우
+                String email = emailEditText.getText().toString().trim();
+                String password = passwordEditText.getText().toString();
+                String passwordCheck = passwordCheckEditText.getText().toString().trim();
 
+                if (TextUtils.isEmpty(email))
+                {
+                    Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
+                    return;
                 }
+
+                if (TextUtils.isEmpty(password))
+                {
+                    Toast.makeText(getApplicationContext(), "Enter password!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (password.length() < 6)
+                {
+                    Toast.makeText(getApplicationContext(), "Password too short, enter minimum 6 characters!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                progressBar.setVisibility(View.VISIBLE);
+
+               if(!email.equals("") && !password.equals("") && !passwordCheckEditText.getText().toString().equals("")) {
+                   createUser(email, password, nameEditText.getText().toString(), "");
+
+               }else {
+                   // 이메일과 비밀번호가 공백인 경우
+                   Toast.makeText(RegisterActivity.this, "계정과 비밀번호를 입력하세요.", Toast.LENGTH_LONG).show();
+               }
             }
         });
     }
 
+//    private void writeNewUser(String userId, String name, String email) {
+//        User user = new User(name, email);
+//
+//        mDatabase.child("users").child(userId).setValue(user)
+//                .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                    @Override
+//                    public void onSuccess(Void aVoid) {
+//                        // Write was successful!
+//                        Toast.makeText(MainActivity.this, "저장을 완료했습니다.", Toast.LENGTH_SHORT).show();
+//                    }
+//                })
+//                .addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        // Write failed
+//                        Toast.makeText(MainActivity.this, "저장을 실패했습니다.", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//
+//    }
+    private void createUser(String email, String password, String name, String profileImageUrl) {
+        auth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task)
+                    {
+                        if (task.isSuccessful())
+                        {
+                            FirebaseUser user = auth.getCurrentUser();
+                            String email = user.getEmail();
+                            String uid = user.getUid();
+                            EditText nameEditText = findViewById(R.id.et_registration_name);
+                            String name = nameEditText.getText().toString().trim();
 
+                            HashMap<Object,String> hashMap = new HashMap<>();
 
+                            hashMap.put("uid", uid);
+                            hashMap.put("email", email);
+                            hashMap.put("name", name);
 
+                            FirebaseDatabase database = FirebaseDatabase.getInstance();
+                            DatabaseReference reference = database.getReference("Users");
+                            reference.child(uid).setValue(hashMap);
+
+                            Toast.makeText(RegisterActivity.this, "회원가입 성공", Toast.LENGTH_SHORT).show();
+                            finish();
+
+                        } else
+                        {
+                            // 계정이 중복된 경우
+                            Toast.makeText(RegisterActivity.this, "이미 존재하는 계정입니다.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
 
 
 }

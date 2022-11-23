@@ -69,35 +69,7 @@ public class LoginActivity extends AppCompatActivity
                 finish();
             }
         });
-//
-//        val logintext = findViewById<TextView>(R.id.loginText)
-//                val signText = findViewById<TextView>(R.id.signText)
-//            val passwordResetText = findViewById<TextView>(R.id.passwordResetText)
-//            val signinbutton = findViewById<LottieAnimationView>(R.id.signUpButton)
-//            val passwordResetButton = findViewById<LottieAnimationView>(R.id.gotoPasswordResetButton)
-//            logintext.bringToFront()
-//        signText.bringToFront()
-//        passwordResetText.bringToFront()
-//
-//        initLoginButton()
-//
-//        signinbutton.setOnClickListener {
-//        let {
-//            val intent = Intent(this, RegisterActivity::class.java)
-//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-//            startActivity(intent)
-//        }
-//    }
-//        passwordResetButton.setOnClickListener {
-//        let {
-//            val intent = Intent(this, PasswordResetActivity::class.java)
-//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-//            startActivity(intent)
-//        }
-//    }
-//    }
-//
-//
+
 //    //로그인 버튼 함수
 //    private fun initLoginButton()
 //    {
@@ -172,4 +144,6 @@ public class LoginActivity extends AppCompatActivity
 //    }
 
     }
+
+
 }

@@ -158,6 +158,7 @@ public class RegisterActivity extends AppCompatActivity
 
                             Toast.makeText(RegisterActivity.this, "회원가입 성공", Toast.LENGTH_SHORT).show();
                             finish();
+                            //테스트
 
                         } else
                         {

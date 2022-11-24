@@ -104,6 +104,7 @@ public class RegisterActivity extends AppCompatActivity
                if(!email.equals("") && !password.equals("") && !passwordCheckEditText.getText().toString().equals("")) {
                    createUser(email, password, nameEditText.getText().toString(), "");
 
+                   progressBar.setVisibility(View.GONE);
                }else {
                    // 이메일과 비밀번호가 공백인 경우
                    Toast.makeText(RegisterActivity.this, "계정과 비밀번호를 입력하세요.", Toast.LENGTH_LONG).show();
@@ -112,26 +113,7 @@ public class RegisterActivity extends AppCompatActivity
         });
     }
 
-//    private void writeNewUser(String userId, String name, String email) {
-//        User user = new User(name, email);
-//
-//        mDatabase.child("users").child(userId).setValue(user)
-//                .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                    @Override
-//                    public void onSuccess(Void aVoid) {
-//                        // Write was successful!
-//                        Toast.makeText(MainActivity.this, "저장을 완료했습니다.", Toast.LENGTH_SHORT).show();
-//                    }
-//                })
-//                .addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//                        // Write failed
-//                        Toast.makeText(MainActivity.this, "저장을 실패했습니다.", Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-//
-//    }
+
     private void createUser(String email, String password, String name, String profileImageUrl) {
         auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {

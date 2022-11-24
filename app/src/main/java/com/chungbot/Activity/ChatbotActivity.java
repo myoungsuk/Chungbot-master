@@ -1,4 +1,4 @@
-package com.chungbot;
+package com.chungbot.Activity;
 
 
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.chungbot.R;
 import com.chungbot.adapters.ChatAdapter;
 import com.chungbot.helpers.SendMessageInBg;
 import com.chungbot.interfaces.BotReply;
@@ -35,7 +36,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
-public class MainActivity extends AppCompatActivity implements BotReply
+public class ChatbotActivity extends AppCompatActivity implements BotReply
 {
     RecyclerView chatView;
     ChatAdapter chatAdapter;
@@ -77,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements BotReply
                             .scrollToPosition(messageList.size() - 1);
                 } else
                 {
-                    Toast.makeText(MainActivity.this, "Please enter text!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ChatbotActivity.this, "Please enter text!", Toast.LENGTH_SHORT).show();
                 }
             }
         });

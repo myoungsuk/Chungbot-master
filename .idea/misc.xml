@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/background_color.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/background_login.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/bg_chat_receive.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/bg_chat_send.xml" value="0.1" />
@@ -13,6 +14,7 @@
         <entry key="app/src/main/res/drawable/drawable_name.xml" value="0.2535" />
         <entry key="app/src/main/res/drawable/ic_add_black_24dp.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_arrow_back_black_24dp.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_baseline.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_baseline_add_photo_alternate_24.xml" value="0.2535" />
         <entry key="app/src/main/res/drawable/ic_baseline_add_to_photos_24.xml" value="0.2535" />
         <entry key="app/src/main/res/drawable/ic_baseline_calendar_month_24.xml" value="0.2535" />
@@ -26,15 +28,27 @@
         <entry key="app/src/main/res/drawable/ic_perm_identity_black_24dp.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_phone_black_24dp.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_profiles.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_settings.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/layout_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/selector_menu_color.xml" value="0.1" />
         <entry key="app/src/main/res/font/custum_font_family.xml" value="0.1574074074074074" />
         <entry key="app/src/main/res/layout/activity_chat_adapter.xml" value="0.25925925925925924" />
+        <entry key="app/src/main/res/layout/activity_chatbot.xml" value="0.22592592592592592" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.18958333333333333" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25925925925925924" />
+        <entry key="app/src/main/res/layout/activity_notice_detail.xml" value="0.22592592592592592" />
         <entry key="app/src/main/res/layout/activity_password_reset.xml" value="0.1864644933629919" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.17619227656611688" />
         <entry key="app/src/main/res/layout/adapter_message_one.xml" value="0.19583333333333333" />
         <entry key="app/src/main/res/layout/drawable_firebase.xml" value="0.203125" />
+        <entry key="app/src/main/res/layout/fragment_chat.xml" value="0.203125" />
+        <entry key="app/src/main/res/layout/fragment_friend.xml" value="0.1730374371563947" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.15008544921875" />
+        <entry key="app/src/main/res/layout/fragment_notice.xml" value="0.2144177449168207" />
+        <entry key="app/src/main/res/layout/fragment_setting.xml" value="0.203125" />
+        <entry key="app/src/main/res/layout/item_chat.xml" value="0.203125" />
+        <entry key="app/src/main/res/layout/item_friend.xml" value="0.20208333333333334" />
+        <entry key="app/src/main/res/layout/profile_dialog.xml" value="0.203125" />
         <entry key="app/src/main/res/layout/test_layout.xml" value="0.18945216426142944" />
         <entry key="app/src/main/res/layout/testlayout.xml" value="0.21477988914207174" />
         <entry key="app/src/main/res/menu/bottom_menu.xml" value="0.22592592592592592" />

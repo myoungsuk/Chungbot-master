@@ -1,28 +1,18 @@
-package com.chungbot.Fragment;
+package com.chungbot;
 
-import static android.content.ContentValues.TAG;
-
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.EditText;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.chungbot.Activity.ChatbotActivity;
-import com.chungbot.Friend;
-import com.chungbot.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -35,14 +25,8 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
-public class HomeFragment extends Fragment
+public class CustomDialog extends DialogFragment
 {
-
-    private Button accessButton;
-    private ImageView profile_imageview;
-    private TextView profile_email;
-    private TextView profile_name;
-
     private ArrayList<Friend> friendList = new ArrayList<>();
     private Friend friend;
     private DatabaseReference mDatabase;
@@ -56,7 +40,7 @@ public class HomeFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
-        View v = inflater.inflate(R.layout.fragment_home, container, false);
+        View v = inflater.inflate(R.layout.custom_dialog, container, false);
         // Inflate the layout for this fragment
 
         auth = FirebaseAuth.getInstance();
@@ -65,37 +49,18 @@ public class HomeFragment extends Fragment
         user = auth.getCurrentUser();
         uid = user.getUid();
 
-        accessButton = (Button) v.findViewById(R.id.startText);
-        profile_imageview = (ImageView) v.findViewById(R.id.profile_imageview);
-        profile_email = (TextView) v.findViewById(R.id.profile_textview_email);
-        profile_name = (TextView) v.findViewById(R.id.profile_textview_name);
+        EditText nameEditText = v.findViewById(R.id.name_edit);
+        Button cancleButton = v.findViewById(R.id.cancel_button);
+        Button okayButton = v.findViewById(R.id.finish_button);
 
-
-        mDatabase.child("Users").child(uid).addValueEventListener(new ValueEventListener()
+        mDatabase.child("Users").child(uid).addListenerForSingleValueEvent(new ValueEventListener()
         {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot)
             {
                 Friend friend = snapshot.getValue(Friend.class);
-
-                String email = friend.email;
                 String name = friend.name;
-
-
-                profile_email.setText(email);
-                profile_name.setText(name);
-
-                if (friend.profileImageUrl.equals(""))
-                        {
-                            //Toast.makeText(requireContext(), "설정에서 프로필을 등록해주세요", Toast.LENGTH_SHORT).show();
-                        } else
-                        {
-                            Glide.with(requireContext())
-                                    .load(friend.profileImageUrl)
-                                    .apply(new RequestOptions().circleCrop())
-                                    .into(profile_imageview);
-                        }
-
+                nameEditText.setText(name);
             }
 
             @Override
@@ -104,20 +69,40 @@ public class HomeFragment extends Fragment
             }
         });
 
-
-        accessButton.setOnClickListener(new View.OnClickListener()
+        cancleButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
-                Intent intent = new Intent(getActivity(), ChatbotActivity.class);
-                startActivity(intent);
+                buttonClickListener.onButton1Clicked();
+                dismiss();
+            }
+        });
+        okayButton.setOnClickListener(new View.OnClickListener()
+        {
+
+            @Override
+            public void onClick(View view)
+            {
+                buttonClickListener.onButton2Clicked(nameEditText.getText().toString());
             }
         });
 
 
         return v;
-
-
     }
+
+    public interface OnButtonClickListener
+    {
+        void onButton1Clicked();
+
+        void onButton2Clicked(String nameEdit);
+    }
+
+    public void setButtonClickListener(OnButtonClickListener buttonClickListener)
+    {
+        this.buttonClickListener = buttonClickListener;
+    }
+
+    private OnButtonClickListener buttonClickListener;
 }

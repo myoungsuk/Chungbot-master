@@ -1,8 +1,11 @@
 package com.chungbot.Activity;
 
+import static android.app.PendingIntent.getActivity;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -21,11 +24,13 @@ public class MainActivity extends AppCompatActivity
     private BottomNavigationView mBottomNavigationView;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         mBottomNavigationView=findViewById(R.id.bottomNavigationView);
 

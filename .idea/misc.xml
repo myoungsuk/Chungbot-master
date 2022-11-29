@@ -51,6 +51,7 @@
         <entry key="app/src/main/res/layout/fragment_setting.xml" value="0.203125" />
         <entry key="app/src/main/res/layout/item_chat.xml" value="0.203125" />
         <entry key="app/src/main/res/layout/item_friend.xml" value="0.20208333333333334" />
+        <entry key="app/src/main/res/layout/item_message.xml" value="0.24074074074074073" />
         <entry key="app/src/main/res/layout/profile_dialog.xml" value="0.203125" />
         <entry key="app/src/main/res/layout/test_layout.xml" value="0.18945216426142944" />
         <entry key="app/src/main/res/layout/testlayout.xml" value="0.21477988914207174" />

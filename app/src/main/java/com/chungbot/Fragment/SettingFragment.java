@@ -47,6 +47,7 @@ public class SettingFragment extends Fragment
     private FirebaseUser user;
     private String uid;
     public CustomDialog dialog = new CustomDialog();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
@@ -67,7 +68,8 @@ public class SettingFragment extends Fragment
         TextView nameEditButton = v.findViewById(R.id.nameEditText);
         TextView signoutButton = v.findViewById(R.id.signoutButton);
 
-        mDatabase.child("Users").child(uid).addValueEventListener(new ValueEventListener()
+        //프로필에 데이터 보여주기
+        mDatabase.child("Users").child(uid).addListenerForSingleValueEvent(new ValueEventListener()
         {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot)
@@ -95,6 +97,7 @@ public class SettingFragment extends Fragment
             }
         });
 
+        //이름변경하기
         nameEditButton.setOnClickListener(new View.OnClickListener() {
 
 
@@ -124,6 +127,8 @@ public class SettingFragment extends Fragment
                 dialog.show(requireActivity().getSupportFragmentManager(), "CustomDialog");
             }
         });
+
+        //사진변경하기
         profileEdit.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -133,6 +138,8 @@ public class SettingFragment extends Fragment
                 startActivity(intent);
             }
         });
+
+        //로그아웃하기
         signoutButton.setOnClickListener(new View.OnClickListener()
         {
 

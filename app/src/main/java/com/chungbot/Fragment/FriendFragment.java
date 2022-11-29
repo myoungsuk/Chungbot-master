@@ -51,6 +51,7 @@ public class FriendFragment extends Fragment
     private StorageReference firebaseStorage;
     private FirebaseUser user;
     private String uid;
+
     private RecyclerView recyclerview;
     private RecyclerViewAdapter mRecyclerAdapter;
 

@@ -2,6 +2,8 @@ package com.chungbot.Fragment;
 
 import static android.content.ContentValues.TAG;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +40,8 @@ import java.util.ArrayList;
 
 public class HomeFragment extends Fragment
 {
+    Activity activity = getActivity();
+
 
     private Button accessButton;
     private ImageView profile_imageview;
@@ -51,6 +56,13 @@ public class HomeFragment extends Fragment
     private StorageReference firebaseStorage;
     private FirebaseUser user;
     private String uid;
+
+    @Override
+    public void onAttach(Context context)
+    {
+        super.onAttach(context);
+        Context mContext = context;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -71,39 +83,39 @@ public class HomeFragment extends Fragment
         profile_name = (TextView) v.findViewById(R.id.profile_textview_name);
 
 
-        mDatabase.child("Users").child(uid).addValueEventListener(new ValueEventListener()
-        {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot)
+            mDatabase.child("Users").child(uid).addListenerForSingleValueEvent(new ValueEventListener()
             {
-                Friend friend = snapshot.getValue(Friend.class);
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot)
+                {
+                    Friend friend = snapshot.getValue(Friend.class);
 
-                String email = friend.email;
-                String name = friend.name;
+                    String email = friend.email;
+                    String name = friend.name;
+                    String photo = friend.profileImageUrl;
+
+                    profile_email.setText(email);
+                    profile_name.setText(name);
 
 
-                profile_email.setText(email);
-                profile_name.setText(name);
+                    if (friend.profileImageUrl.equals(""))
+                    {
+                        //Toast.makeText(requireContext(), "설정에서 프로필을 등록해주세요", Toast.LENGTH_SHORT).show();
+                    } else
+                    {
+                        Glide.with(getContext())
+                                .load(photo)
+                                .apply(new RequestOptions().circleCrop())
+                                .into(profile_imageview);
+                    }
 
-                if (friend.profileImageUrl.equals(""))
-                        {
-                            //Toast.makeText(requireContext(), "설정에서 프로필을 등록해주세요", Toast.LENGTH_SHORT).show();
-                        } else
-                        {
-                            Glide.with(requireContext())
-                                    .load(friend.profileImageUrl)
-                                    .apply(new RequestOptions().circleCrop())
-                                    .into(profile_imageview);
-                        }
+                }
 
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error)
-            {
-            }
-        });
-
+                @Override
+                public void onCancelled(@NonNull DatabaseError error)
+                {
+                }
+            });
 
         accessButton.setOnClickListener(new View.OnClickListener()
         {
@@ -120,4 +132,6 @@ public class HomeFragment extends Fragment
 
 
     }
+
+
 }

@@ -27,6 +27,7 @@ public class LoginActivity extends AppCompatActivity
     Button passwordResetButton;
     EditText emailEditText;
     EditText passwordEditText;
+
     private ProgressBar progressBar;
     private FirebaseAuth auth;
 

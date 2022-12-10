@@ -5,7 +5,17 @@ public class NoticeItem {
     private String title;
     private String writer;
     private String date;
-    private String prevContent;
+    private String content;
+
+    public NoticeItem() { };
+
+    public NoticeItem(int nid, String title, String writer, String date, String content) {
+        this.nid = nid;
+        this.title = title;
+        this.writer = writer;
+        this.date = date;
+        this.content = content;
+    }
 
     public int getNid() {
         return nid;
@@ -39,11 +49,11 @@ public class NoticeItem {
         this.date = date;
     }
 
-    public String getPrevContent() {
-        return prevContent;
+    public String getContent() {
+        return content;
     }
 
-    public void setPrevContent(String prevContent) {
-        this.prevContent = prevContent;
+    public void setContent(String content) {
+        this.content = content;
     }
 }

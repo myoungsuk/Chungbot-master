@@ -25,7 +25,7 @@ public class NoticeFragment extends Fragment
 {
     Activity activity = getActivity();
 
-    private ArrayList<String> noticeList;
+    private ArrayList<NoticeItem> noticeList;
     private RecyclerView mRecyclerView;
     private NoticeRecyclerViewAdapter mRecyclerViewAdapter;
 
@@ -40,16 +40,18 @@ public class NoticeFragment extends Fragment
         // Inflate the layout for this fragment
 
         noticeList = new ArrayList<>();
-        //임시
-        for (int i=0; i<100; i++) {
-            noticeList.add(String.format("TEXT %d", i)) ;
-        }
+
+        // 내용 채우기.
+        // 1.네트워크 통신으로 json 객체 받아서, 2.문자열로 변환 후에, 3.noticeList 에 모두 add하기
+        noticeList.add(new NoticeItem(1, "제목1", "작성자1", "작성일1", "내용1"));
+        noticeList.add(new NoticeItem(2, "제목2", "작성자2", "작성일2", "내용2"));
 
         mRecyclerView = v.findViewById(R.id.articleRecyclerView);
         mRecyclerViewAdapter = new NoticeRecyclerViewAdapter(noticeList);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         mRecyclerView.setAdapter(mRecyclerViewAdapter);
+
 
 //        addButton = (Button) v.findViewById(R.id.addFloatingButton);
 //
@@ -67,19 +69,22 @@ public class NoticeFragment extends Fragment
 }
 
 class NoticeRecyclerViewAdapter extends RecyclerView.Adapter<NoticeRecyclerViewAdapter.ViewHolder> {
-    private ArrayList<String> noticeList;
+    private ArrayList<NoticeItem> noticeList;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView title;
+        public TextView title, writer, date, pre_content;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            title = itemView.findViewById(R.id.notice_item);
+            title = itemView.findViewById(R.id.title);
+            writer = itemView.findViewById(R.id.writer);
+            date = itemView.findViewById(R.id.date);
+            pre_content = itemView.findViewById(R.id.pre_content);
         }
     }
 
-    public NoticeRecyclerViewAdapter(ArrayList<String> noticeList) {
+    public NoticeRecyclerViewAdapter(ArrayList<NoticeItem> noticeList) {
         this.noticeList = noticeList;
     }
 
@@ -93,8 +98,10 @@ class NoticeRecyclerViewAdapter extends RecyclerView.Adapter<NoticeRecyclerViewA
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String text = noticeList.get(position);
-        holder.title.setText(text);
+        holder.title.setText(noticeList.get(position).getTitle());
+        holder.writer.setText(noticeList.get(position).getWriter());
+        holder.date.setText(noticeList.get(position).getTitle());
+        holder.pre_content.setText(noticeList.get(position).getContent());
     }
 
     @Override

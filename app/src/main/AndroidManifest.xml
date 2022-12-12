@@ -19,6 +19,9 @@
         android:theme="@style/Theme.Chungbot"
         tools:targetApi="31">
         <activity
+            android:name=".Activity.AddArticleActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.AddPhotoActivity"
             android:exported="false" />
         <activity
